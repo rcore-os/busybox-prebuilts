@@ -1,0 +1,1335 @@
+Output of:
+riscv32-linux-musl-gcc -Wall -Wshadow -Wwrite-strings -Wundef -Wstrict-prototypes -Wunused -Wunused-parameter -Wunused-function -Wunused-value -Wmissing-prototypes -Wmissing-declarations -Wno-format-security -Wdeclaration-after-statement -Wold-style-definition -fno-builtin-strlen -finline-limit=0 -fomit-frame-pointer -ffunction-sections -fdata-sections -fno-guess-branch-probability -funsigned-char -static-libgcc -falign-functions=1 -falign-jumps=1 -falign-labels=1 -falign-loops=1 -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-builtin-printf -Os -Os -static -o busybox_unstripped -Wl,--sort-common -Wl,--sort-section,alignment -Wl,--gc-sections -Wl,--start-group applets/built-in.o archival/lib.a archival/libarchive/lib.a console-tools/lib.a coreutils/lib.a coreutils/libcoreutils/lib.a debianutils/lib.a klibc-utils/lib.a e2fsprogs/lib.a editors/lib.a findutils/lib.a init/lib.a libbb/lib.a libpwdgrp/lib.a loginutils/lib.a mailutils/lib.a miscutils/lib.a modutils/lib.a networking/lib.a networking/libiproute/lib.a networking/udhcp/lib.a printutils/lib.a procps/lib.a runit/lib.a selinux/lib.a shell/lib.a sysklogd/lib.a util-linux/lib.a util-linux/volume_id/lib.a archival/built-in.o archival/libarchive/built-in.o console-tools/built-in.o coreutils/built-in.o coreutils/libcoreutils/built-in.o debianutils/built-in.o klibc-utils/built-in.o e2fsprogs/built-in.o editors/built-in.o findutils/built-in.o init/built-in.o libbb/built-in.o libpwdgrp/built-in.o loginutils/built-in.o mailutils/built-in.o miscutils/built-in.o modutils/built-in.o networking/built-in.o networking/libiproute/built-in.o networking/udhcp/built-in.o printutils/built-in.o procps/built-in.o runit/built-in.o selinux/built-in.o shell/built-in.o sysklogd/built-in.o util-linux/built-in.o util-linux/volume_id/built-in.o -Wl,--end-group -Wl,--start-group -Wl,--end-group -Wl,--warn-common -Wl,-Map,busybox_unstripped.map -Wl,--verbose
+==========
+GNU ld (GNU Binutils) 2.32
+  Supported emulations:
+   elf32lriscv
+   elf32lriscv_ilp32f
+   elf32lriscv_ilp32
+   elf64lriscv
+   elf64lriscv_lp64f
+   elf64lriscv_lp64
+using internal linker script:
+==================================================
+/* Script for -z combreloc: combine and sort reloc sections */
+/* Copyright (C) 2014-2019 Free Software Foundation, Inc.
+   Copying and distribution of this script, with or without modification,
+   are permitted in any medium without royalty provided the copyright
+   notice and this notice are preserved.  */
+OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv",
+	      "elf32-littleriscv")
+OUTPUT_ARCH(riscv)
+ENTRY(_start)
+SEARCH_DIR("=/riscv32-linux-musl/lib32/ilp32d"); SEARCH_DIR("=/riscv32-linux-musl/lib32"); SEARCH_DIR("=/usr/local/lib32/ilp32d"); SEARCH_DIR("=/usr/local/lib32"); SEARCH_DIR("=/lib32/ilp32d"); SEARCH_DIR("=/lib32"); SEARCH_DIR("=/usr/lib32/ilp32d"); SEARCH_DIR("=/usr/lib32"); SEARCH_DIR("=/riscv32-linux-musl/lib"); SEARCH_DIR("=/usr/local/lib"); SEARCH_DIR("=/lib"); SEARCH_DIR("=/usr/lib");
+SECTIONS
+{
+  /* Read-only sections, merged into text segment: */
+  PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x10000)); . = SEGMENT_START("text-segment", 0x10000) + SIZEOF_HEADERS;
+  .interp         : { *(.interp) }
+  .note.gnu.build-id  : { *(.note.gnu.build-id) }
+  .hash           : { *(.hash) }
+  .gnu.hash       : { *(.gnu.hash) }
+  .dynsym         : { *(.dynsym) }
+  .dynstr         : { *(.dynstr) }
+  .gnu.version    : { *(.gnu.version) }
+  .gnu.version_d  : { *(.gnu.version_d) }
+  .gnu.version_r  : { *(.gnu.version_r) }
+  .rela.dyn       :
+    {
+      *(.rela.init)
+      *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.fini)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+      *(.rela.ctors)
+      *(.rela.dtors)
+      *(.rela.got)
+      *(.rela.sdata .rela.sdata.* .rela.gnu.linkonce.s.*)
+      *(.rela.sbss .rela.sbss.* .rela.gnu.linkonce.sb.*)
+      *(.rela.sdata2 .rela.sdata2.* .rela.gnu.linkonce.s2.*)
+      *(.rela.sbss2 .rela.sbss2.* .rela.gnu.linkonce.sb2.*)
+      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+      PROVIDE_HIDDEN (__rela_iplt_start = .);
+      *(.rela.iplt)
+      PROVIDE_HIDDEN (__rela_iplt_end = .);
+    }
+  .rela.plt       :
+    {
+      *(.rela.plt)
+    }
+  .init           :
+  {
+    KEEP (*(SORT_NONE(.init)))
+  }
+  .plt            : { *(.plt) }
+  .iplt           : { *(.iplt) }
+  .text           :
+  {
+    *(.text.unlikely .text.*_unlikely .text.unlikely.*)
+    *(.text.exit .text.exit.*)
+    *(.text.startup .text.startup.*)
+    *(.text.hot .text.hot.*)
+    *(.text .stub .text.* .gnu.linkonce.t.*)
+    /* .gnu.warning sections are handled specially by elf32.em.  */
+    *(.gnu.warning)
+  }
+  .fini           :
+  {
+    KEEP (*(SORT_NONE(.fini)))
+  }
+  PROVIDE (__etext = .);
+  PROVIDE (_etext = .);
+  PROVIDE (etext = .);
+  .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) }
+  .rodata1        : { *(.rodata1) }
+  .sdata2         :
+  {
+    *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+  }
+  .sbss2          : { *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*) }
+  .eh_frame_hdr   : { *(.eh_frame_hdr) *(.eh_frame_entry .eh_frame_entry.*) }
+  .eh_frame       : ONLY_IF_RO { KEEP (*(.eh_frame)) *(.eh_frame.*) }
+  .gcc_except_table   : ONLY_IF_RO { *(.gcc_except_table .gcc_except_table.*) }
+  .gnu_extab   : ONLY_IF_RO { *(.gnu_extab*) }
+  /* These sections are generated by the Sun/Oracle C++ compiler.  */
+  .exception_ranges   : ONLY_IF_RO { *(.exception_ranges*) }
+  /* Adjust the address for the data segment.  We want to adjust up to
+     the same address within the page on the next page up.  */
+  . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE));
+  /* Exception handling  */
+  .eh_frame       : ONLY_IF_RW { KEEP (*(.eh_frame)) *(.eh_frame.*) }
+  .gnu_extab      : ONLY_IF_RW { *(.gnu_extab) }
+  .gcc_except_table   : ONLY_IF_RW { *(.gcc_except_table .gcc_except_table.*) }
+  .exception_ranges   : ONLY_IF_RW { *(.exception_ranges*) }
+  /* Thread Local Storage sections  */
+  .tdata	  :
+   {
+     PROVIDE_HIDDEN (__tdata_start = .);
+     *(.tdata .tdata.* .gnu.linkonce.td.*)
+   }
+  .tbss		  : { *(.tbss .tbss.* .gnu.linkonce.tb.*) *(.tcommon) }
+  .preinit_array    :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+  }
+  .init_array    :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
+    KEEP (*(.init_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .ctors))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  }
+  .fini_array    :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
+    KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  }
+  .ctors          :
+  {
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    KEEP (*crtbegin.o(.ctors))
+    KEEP (*crtbegin?.o(.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+    KEEP (*(SORT(.ctors.*)))
+    KEEP (*(.ctors))
+  }
+  .dtors          :
+  {
+    KEEP (*crtbegin.o(.dtors))
+    KEEP (*crtbegin?.o(.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+    KEEP (*(SORT(.dtors.*)))
+    KEEP (*(.dtors))
+  }
+  .jcr            : { KEEP (*(.jcr)) }
+  .data.rel.ro : { *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*) *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*) }
+  .dynamic        : { *(.dynamic) }
+  . = DATA_SEGMENT_RELRO_END (0, .);
+  .data           :
+  {
+    __DATA_BEGIN__ = .;
+    *(.data .data.* .gnu.linkonce.d.*)
+    SORT(CONSTRUCTORS)
+  }
+  .data1          : { *(.data1) }
+  .got            : { *(.got.plt) *(.igot.plt) *(.got) *(.igot) }
+  /* We want the small data sections together, so single-instruction offsets
+     can access them all, and initialized data all before uninitialized, so
+     we can shorten the on-disk segment size.  */
+  .sdata          :
+  {
+    __SDATA_BEGIN__ = .;
+    *(.srodata.cst16) *(.srodata.cst8) *(.srodata.cst4) *(.srodata.cst2) *(.srodata .srodata.*)
+    *(.sdata .sdata.* .gnu.linkonce.s.*)
+  }
+  _edata = .; PROVIDE (edata = .);
+  . = .;
+  __bss_start = .;
+  .sbss           :
+  {
+    *(.dynsbss)
+    *(.sbss .sbss.* .gnu.linkonce.sb.*)
+    *(.scommon)
+  }
+  .bss            :
+  {
+   *(.dynbss)
+   *(.bss .bss.* .gnu.linkonce.b.*)
+   *(COMMON)
+   /* Align here to ensure that the .bss section occupies space up to
+      _end.  Align after .bss to ensure correct alignment even if the
+      .bss section disappears because there are no input sections.
+      FIXME: Why do we need it? When there is no .bss section, we do not
+      pad the .data section.  */
+   . = ALIGN(. != 0 ? 32 / 8 : 1);
+  }
+  . = ALIGN(32 / 8);
+  . = SEGMENT_START("ldata-segment", .);
+  . = ALIGN(32 / 8);
+  __BSS_END__ = .;
+    __global_pointer$ = MIN(__SDATA_BEGIN__ + 0x800,
+		            MAX(__DATA_BEGIN__ + 0x800, __BSS_END__ - 0x800));
+  _end = .; PROVIDE (end = .);
+  . = DATA_SEGMENT_END (.);
+  /* Stabs debugging sections.  */
+  .stab          0 : { *(.stab) }
+  .stabstr       0 : { *(.stabstr) }
+  .stab.excl     0 : { *(.stab.excl) }
+  .stab.exclstr  0 : { *(.stab.exclstr) }
+  .stab.index    0 : { *(.stab.index) }
+  .stab.indexstr 0 : { *(.stab.indexstr) }
+  .comment       0 : { *(.comment) }
+  .gnu.build.attributes : { *(.gnu.build.attributes .gnu.build.attributes.*) }
+  /* DWARF debug sections.
+     Symbols in the DWARF debugging sections are relative to the beginning
+     of the section so we begin them at 0.  */
+  /* DWARF 1 */
+  .debug          0 : { *(.debug) }
+  .line           0 : { *(.line) }
+  /* GNU DWARF 1 extensions */
+  .debug_srcinfo  0 : { *(.debug_srcinfo) }
+  .debug_sfnames  0 : { *(.debug_sfnames) }
+  /* DWARF 1.1 and DWARF 2 */
+  .debug_aranges  0 : { *(.debug_aranges) }
+  .debug_pubnames 0 : { *(.debug_pubnames) }
+  /* DWARF 2 */
+  .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+  .debug_abbrev   0 : { *(.debug_abbrev) }
+  .debug_line     0 : { *(.debug_line .debug_line.* .debug_line_end) }
+  .debug_frame    0 : { *(.debug_frame) }
+  .debug_str      0 : { *(.debug_str) }
+  .debug_loc      0 : { *(.debug_loc) }
+  .debug_macinfo  0 : { *(.debug_macinfo) }
+  /* SGI/MIPS DWARF 2 extensions */
+  .debug_weaknames 0 : { *(.debug_weaknames) }
+  .debug_funcnames 0 : { *(.debug_funcnames) }
+  .debug_typenames 0 : { *(.debug_typenames) }
+  .debug_varnames  0 : { *(.debug_varnames) }
+  /* DWARF 3 */
+  .debug_pubtypes 0 : { *(.debug_pubtypes) }
+  .debug_ranges   0 : { *(.debug_ranges) }
+  /* DWARF Extension.  */
+  .debug_macro    0 : { *(.debug_macro) }
+  .debug_addr     0 : { *(.debug_addr) }
+  .gnu.attributes 0 : { KEEP (*(.gnu.attributes)) }
+  /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) *(.gnu.lto_*) }
+}
+
+
+==================================================
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/bin/ld: mode elf32lriscv
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/crt1.o succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/crt1.o
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crti.o succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crti.o
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtbeginT.o succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtbeginT.o
+attempt to open applets/built-in.o succeeded
+applets/built-in.o
+attempt to open archival/lib.a succeeded
+archival/lib.a
+attempt to open archival/libarchive/lib.a succeeded
+archival/libarchive/lib.a
+attempt to open console-tools/lib.a succeeded
+console-tools/lib.a
+attempt to open coreutils/lib.a succeeded
+coreutils/lib.a
+attempt to open coreutils/libcoreutils/lib.a succeeded
+coreutils/libcoreutils/lib.a
+attempt to open debianutils/lib.a succeeded
+debianutils/lib.a
+attempt to open klibc-utils/lib.a succeeded
+klibc-utils/lib.a
+attempt to open e2fsprogs/lib.a succeeded
+e2fsprogs/lib.a
+attempt to open editors/lib.a succeeded
+editors/lib.a
+attempt to open findutils/lib.a succeeded
+findutils/lib.a
+attempt to open init/lib.a succeeded
+init/lib.a
+attempt to open libbb/lib.a succeeded
+libbb/lib.a
+(libbb/lib.a)appletlib.o
+(libbb/lib.a)compare_string_array.o
+(libbb/lib.a)concat_path_file.o
+(libbb/lib.a)default_error_retval.o
+(libbb/lib.a)get_last_path_component.o
+(libbb/lib.a)last_char_is.o
+(libbb/lib.a)llist.o
+(libbb/lib.a)messages.o
+(libbb/lib.a)perror_msg.o
+(libbb/lib.a)skip_whitespace.o
+(libbb/lib.a)verror_msg.o
+(libbb/lib.a)wfopen.o
+(libbb/lib.a)xfunc_die.o
+(libbb/lib.a)xfuncs.o
+(libbb/lib.a)xfuncs_printf.o
+(libbb/lib.a)xreadlink.o
+(libbb/lib.a)copyfd.o
+(libbb/lib.a)full_write.o
+(libbb/lib.a)read.o
+(libbb/lib.a)safe_write.o
+(libbb/lib.a)signals.o
+(libbb/lib.a)time.o
+(libbb/lib.a)bb_strtonum.o
+attempt to open libpwdgrp/lib.a succeeded
+libpwdgrp/lib.a
+(libpwdgrp/lib.a)uidgid_get.o
+attempt to open loginutils/lib.a succeeded
+loginutils/lib.a
+attempt to open mailutils/lib.a succeeded
+mailutils/lib.a
+attempt to open miscutils/lib.a succeeded
+miscutils/lib.a
+(miscutils/lib.a)bc.o
+(miscutils/lib.a)less.o
+attempt to open modutils/lib.a succeeded
+modutils/lib.a
+attempt to open networking/lib.a succeeded
+networking/lib.a
+(networking/lib.a)arp.o
+(networking/lib.a)arping.o
+(networking/lib.a)dnsd.o
+(networking/lib.a)ether-wake.o
+(networking/lib.a)ftpd.o
+(networking/lib.a)ftpgetput.o
+(networking/lib.a)hostname.o
+(networking/lib.a)httpd.o
+(networking/lib.a)ifconfig.o
+(networking/lib.a)ifenslave.o
+(networking/lib.a)ifplugd.o
+(networking/lib.a)ifupdown.o
+(networking/lib.a)inetd.o
+(networking/lib.a)interface.o
+(networking/lib.a)ip.o
+(networking/lib.a)ipcalc.o
+(networking/lib.a)isrv_identd.o
+(networking/lib.a)nameif.o
+(networking/lib.a)nbd-client.o
+(networking/lib.a)nc.o
+(networking/lib.a)netstat.o
+(networking/lib.a)nslookup.o
+(networking/lib.a)ntpd.o
+(networking/lib.a)parse_pasv_epsv.o
+(networking/lib.a)ping.o
+(networking/lib.a)pscan.o
+(networking/lib.a)route.o
+(networking/lib.a)slattach.o
+(networking/lib.a)ssl_client.o
+(networking/lib.a)tc.o
+(networking/lib.a)tcpudp.o
+(networking/lib.a)tcpudp_perhost.o
+(networking/lib.a)telnet.o
+(networking/lib.a)telnetd.o
+(networking/lib.a)tftp.o
+(networking/lib.a)tls.o
+(networking/lib.a)tls_aes.o
+(networking/lib.a)tls_aesgcm.o
+(networking/lib.a)tls_fe.o
+(networking/lib.a)tls_pstm.o
+(networking/lib.a)tls_pstm_montgomery_reduce.o
+(networking/lib.a)tls_pstm_mul_comba.o
+(networking/lib.a)tls_pstm_sqr_comba.o
+(networking/lib.a)tls_rsa.o
+(networking/lib.a)traceroute.o
+(networking/lib.a)tunctl.o
+(networking/lib.a)vconfig.o
+(networking/lib.a)wget.o
+(networking/lib.a)whois.o
+(networking/lib.a)zcip.o
+(networking/lib.a)isrv.o
+attempt to open networking/libiproute/lib.a succeeded
+networking/libiproute/lib.a
+(networking/libiproute/lib.a)ip_parse_common_args.o
+(networking/libiproute/lib.a)ipaddress.o
+(networking/libiproute/lib.a)iplink.o
+(networking/libiproute/lib.a)ipneigh.o
+(networking/libiproute/lib.a)iproute.o
+(networking/libiproute/lib.a)iprule.o
+(networking/libiproute/lib.a)iptunnel.o
+(networking/libiproute/lib.a)libnetlink.o
+(networking/libiproute/lib.a)ll_addr.o
+(networking/libiproute/lib.a)ll_map.o
+(networking/libiproute/lib.a)ll_proto.o
+(networking/libiproute/lib.a)ll_types.o
+(networking/libiproute/lib.a)rt_names.o
+(networking/libiproute/lib.a)rtm_map.o
+(networking/libiproute/lib.a)utils.o
+attempt to open networking/udhcp/lib.a succeeded
+networking/udhcp/lib.a
+(networking/udhcp/lib.a)dhcpc.o
+(networking/udhcp/lib.a)dhcpd.o
+(networking/udhcp/lib.a)dhcprelay.o
+(networking/udhcp/lib.a)domain_codec.o
+(networking/udhcp/lib.a)dumpleases.o
+(networking/udhcp/lib.a)packet.o
+(networking/udhcp/lib.a)signalpipe.o
+(networking/udhcp/lib.a)socket.o
+(networking/udhcp/lib.a)arpping.o
+(networking/udhcp/lib.a)common.o
+attempt to open printutils/lib.a succeeded
+printutils/lib.a
+attempt to open procps/lib.a succeeded
+procps/lib.a
+(procps/lib.a)free.o
+(procps/lib.a)fuser.o
+(procps/lib.a)iostat.o
+(procps/lib.a)kill.o
+(procps/lib.a)lsof.o
+(procps/lib.a)mpstat.o
+(procps/lib.a)nmeter.o
+(procps/lib.a)pgrep.o
+(procps/lib.a)pidof.o
+(procps/lib.a)pmap.o
+(procps/lib.a)powertop.o
+(procps/lib.a)ps.o
+(procps/lib.a)pstree.o
+(procps/lib.a)pwdx.o
+(procps/lib.a)smemcap.o
+(procps/lib.a)sysctl.o
+(procps/lib.a)top.o
+(procps/lib.a)uptime.o
+(procps/lib.a)watch.o
+attempt to open runit/lib.a succeeded
+runit/lib.a
+attempt to open selinux/lib.a succeeded
+selinux/lib.a
+attempt to open shell/lib.a succeeded
+shell/lib.a
+(shell/lib.a)ash.o
+(shell/lib.a)ash_ptr_hack.o
+(shell/lib.a)cttyhack.o
+(shell/lib.a)hush.o
+(shell/lib.a)match.o
+(shell/lib.a)math.o
+(shell/lib.a)random.o
+(shell/lib.a)shell_common.o
+attempt to open sysklogd/lib.a succeeded
+sysklogd/lib.a
+attempt to open util-linux/lib.a succeeded
+util-linux/lib.a
+(util-linux/lib.a)hexdump.o
+(util-linux/lib.a)hexdump_xxd.o
+attempt to open util-linux/volume_id/lib.a succeeded
+util-linux/volume_id/lib.a
+attempt to open archival/built-in.o succeeded
+archival/built-in.o
+attempt to open archival/libarchive/built-in.o succeeded
+archival/libarchive/built-in.o
+attempt to open console-tools/built-in.o succeeded
+console-tools/built-in.o
+attempt to open coreutils/built-in.o succeeded
+coreutils/built-in.o
+attempt to open coreutils/libcoreutils/built-in.o succeeded
+coreutils/libcoreutils/built-in.o
+attempt to open debianutils/built-in.o succeeded
+debianutils/built-in.o
+attempt to open klibc-utils/built-in.o succeeded
+klibc-utils/built-in.o
+attempt to open e2fsprogs/built-in.o succeeded
+e2fsprogs/built-in.o
+attempt to open editors/built-in.o succeeded
+editors/built-in.o
+attempt to open findutils/built-in.o succeeded
+findutils/built-in.o
+attempt to open init/built-in.o succeeded
+init/built-in.o
+attempt to open libbb/built-in.o succeeded
+libbb/built-in.o
+attempt to open libpwdgrp/built-in.o succeeded
+libpwdgrp/built-in.o
+attempt to open loginutils/built-in.o succeeded
+loginutils/built-in.o
+attempt to open mailutils/built-in.o succeeded
+mailutils/built-in.o
+attempt to open miscutils/built-in.o succeeded
+miscutils/built-in.o
+attempt to open modutils/built-in.o succeeded
+modutils/built-in.o
+attempt to open networking/built-in.o succeeded
+networking/built-in.o
+attempt to open networking/libiproute/built-in.o succeeded
+networking/libiproute/built-in.o
+attempt to open networking/udhcp/built-in.o succeeded
+networking/udhcp/built-in.o
+attempt to open printutils/built-in.o succeeded
+printutils/built-in.o
+attempt to open procps/built-in.o succeeded
+procps/built-in.o
+attempt to open runit/built-in.o succeeded
+runit/built-in.o
+attempt to open selinux/built-in.o succeeded
+selinux/built-in.o
+attempt to open shell/built-in.o succeeded
+shell/built-in.o
+attempt to open sysklogd/built-in.o succeeded
+sysklogd/built-in.o
+attempt to open util-linux/built-in.o succeeded
+util-linux/built-in.o
+attempt to open util-linux/volume_id/built-in.o succeeded
+util-linux/volume_id/built-in.o
+archival/lib.a
+(archival/lib.a)bbunzip.o
+(archival/lib.a)bzip2.o
+(archival/lib.a)gzip.o
+(archival/lib.a)lzop.o
+(archival/lib.a)rpm.o
+(archival/lib.a)tar.o
+(archival/lib.a)unzip.o
+archival/libarchive/lib.a
+(archival/libarchive/lib.a)data_extract_all.o
+(archival/libarchive/lib.a)data_extract_to_command.o
+(archival/libarchive/lib.a)data_extract_to_stdout.o
+(archival/libarchive/lib.a)data_skip.o
+(archival/libarchive/lib.a)decompress_bunzip2.o
+(archival/libarchive/lib.a)decompress_gunzip.o
+(archival/libarchive/lib.a)decompress_unlzma.o
+(archival/libarchive/lib.a)decompress_unxz.o
+(archival/libarchive/lib.a)filter_accept_reject_list.o
+(archival/libarchive/lib.a)find_list_entry.o
+(archival/libarchive/lib.a)get_header_cpio.o
+(archival/libarchive/lib.a)get_header_tar.o
+(archival/libarchive/lib.a)header_list.o
+(archival/libarchive/lib.a)header_verbose_list.o
+(archival/libarchive/lib.a)init_handle.o
+(archival/libarchive/lib.a)lzo1x_1.o
+(archival/libarchive/lib.a)lzo1x_1o.o
+(archival/libarchive/lib.a)lzo1x_d.o
+(archival/libarchive/lib.a)open_transformer.o
+(archival/libarchive/lib.a)seek_by_jump.o
+(archival/libarchive/lib.a)seek_by_read.o
+(archival/libarchive/lib.a)unsafe_prefix.o
+(archival/libarchive/lib.a)unsafe_symlink_target.o
+(archival/libarchive/lib.a)common.o
+(archival/libarchive/lib.a)data_align.o
+(archival/libarchive/lib.a)filter_accept_all.o
+(archival/libarchive/lib.a)header_skip.o
+console-tools/lib.a
+(console-tools/lib.a)clear.o
+coreutils/lib.a
+(coreutils/lib.a)basename.o
+(coreutils/lib.a)cat.o
+(coreutils/lib.a)chgrp.o
+(coreutils/lib.a)chmod.o
+(coreutils/lib.a)chown.o
+(coreutils/lib.a)chroot.o
+(coreutils/lib.a)cksum.o
+(coreutils/lib.a)comm.o
+(coreutils/lib.a)cp.o
+(coreutils/lib.a)cut.o
+(coreutils/lib.a)date.o
+(coreutils/lib.a)dd.o
+(coreutils/lib.a)df.o
+(coreutils/lib.a)dirname.o
+(coreutils/lib.a)dos2unix.o
+(coreutils/lib.a)du.o
+(coreutils/lib.a)echo.o
+(coreutils/lib.a)env.o
+(coreutils/lib.a)expand.o
+(coreutils/lib.a)expr.o
+(coreutils/lib.a)factor.o
+(coreutils/lib.a)false.o
+(coreutils/lib.a)fold.o
+(coreutils/lib.a)fsync.o
+(coreutils/lib.a)head.o
+(coreutils/lib.a)link.o
+(coreutils/lib.a)ln.o
+(coreutils/lib.a)logname.o
+(coreutils/lib.a)ls.o
+(coreutils/lib.a)md5_sha1_sum.o
+(coreutils/lib.a)mkdir.o
+(coreutils/lib.a)mkfifo.o
+(coreutils/lib.a)mknod.o
+(coreutils/lib.a)mktemp.o
+(coreutils/lib.a)mv.o
+(coreutils/lib.a)nice.o
+(coreutils/lib.a)nl.o
+(coreutils/lib.a)nohup.o
+(coreutils/lib.a)nproc.o
+(coreutils/lib.a)od.o
+(coreutils/lib.a)paste.o
+(coreutils/lib.a)printenv.o
+(coreutils/lib.a)printf.o
+(coreutils/lib.a)pwd.o
+(coreutils/lib.a)readlink.o
+(coreutils/lib.a)realpath.o
+(coreutils/lib.a)rm.o
+(coreutils/lib.a)rmdir.o
+(coreutils/lib.a)seq.o
+(coreutils/lib.a)shred.o
+(coreutils/lib.a)shuf.o
+(coreutils/lib.a)sleep.o
+(coreutils/lib.a)sort.o
+(coreutils/lib.a)split.o
+(coreutils/lib.a)stat.o
+(coreutils/lib.a)sum.o
+(coreutils/lib.a)sync.o
+(coreutils/lib.a)tac.o
+(coreutils/lib.a)tail.o
+(coreutils/lib.a)tee.o
+(coreutils/lib.a)test.o
+(coreutils/lib.a)test_ptr_hack.o
+(coreutils/lib.a)timeout.o
+(coreutils/lib.a)touch.o
+(coreutils/lib.a)tr.o
+(coreutils/lib.a)true.o
+(coreutils/lib.a)truncate.o
+(coreutils/lib.a)tty.o
+(coreutils/lib.a)uname.o
+(coreutils/lib.a)uniq.o
+(coreutils/lib.a)unlink.o
+(coreutils/lib.a)usleep.o
+(coreutils/lib.a)uudecode.o
+(coreutils/lib.a)uuencode.o
+(coreutils/lib.a)wc.o
+(coreutils/lib.a)yes.o
+coreutils/libcoreutils/lib.a
+(coreutils/libcoreutils/lib.a)cp_mv_stat.o
+(coreutils/libcoreutils/lib.a)getopt_mk_fifo_nod.o
+debianutils/lib.a
+klibc-utils/lib.a
+e2fsprogs/lib.a
+editors/lib.a
+(editors/lib.a)awk.o
+(editors/lib.a)cmp.o
+(editors/lib.a)diff.o
+(editors/lib.a)ed.o
+(editors/lib.a)patch.o
+(editors/lib.a)sed.o
+(editors/lib.a)vi.o
+findutils/lib.a
+(findutils/lib.a)find.o
+(findutils/lib.a)grep.o
+(findutils/lib.a)xargs.o
+init/lib.a
+libbb/lib.a
+(libbb/lib.a)ask_confirmation.o
+(libbb/lib.a)auto_string.o
+(libbb/lib.a)bb_bswap_64.o
+(libbb/lib.a)bb_cat.o
+(libbb/lib.a)bb_getgroups.o
+(libbb/lib.a)bb_getsockname.o
+(libbb/lib.a)bb_pwd.o
+(libbb/lib.a)bb_qsort.o
+(libbb/lib.a)change_identity.o
+(libbb/lib.a)chomp.o
+(libbb/lib.a)common_bufsiz.o
+(libbb/lib.a)concat_subpath_file.o
+(libbb/lib.a)copy_file.o
+(libbb/lib.a)correct_password.o
+(libbb/lib.a)crc32.o
+(libbb/lib.a)dump.o
+(libbb/lib.a)duration.o
+(libbb/lib.a)endofname.o
+(libbb/lib.a)executable.o
+(libbb/lib.a)fclose_nonstdin.o
+(libbb/lib.a)fflush_stdout_and_exit.o
+(libbb/lib.a)fgets_str.o
+(libbb/lib.a)find_mount_point.o
+(libbb/lib.a)find_pid_by_name.o
+(libbb/lib.a)get_cpu_count.o
+(libbb/lib.a)get_line_from_file.o
+(libbb/lib.a)get_shell_name.o
+(libbb/lib.a)getopt32.o
+(libbb/lib.a)getopt_allopts.o
+(libbb/lib.a)getpty.o
+(libbb/lib.a)hash_md5_sha.o
+(libbb/lib.a)herror_msg.o
+(libbb/lib.a)human_readable.o
+(libbb/lib.a)in_ether.o
+(libbb/lib.a)inet_cksum.o
+(libbb/lib.a)inet_common.o
+(libbb/lib.a)inode_hash.o
+(libbb/lib.a)isdirectory.o
+(libbb/lib.a)isqrt.o
+(libbb/lib.a)lineedit.o
+(libbb/lib.a)lineedit_ptr_hack.o
+(libbb/lib.a)logenv.o
+(libbb/lib.a)login.o
+(libbb/lib.a)make_directory.o
+(libbb/lib.a)mode_string.o
+(libbb/lib.a)nuke_str.o
+(libbb/lib.a)parse_config.o
+(libbb/lib.a)parse_mode.o
+(libbb/lib.a)percent_decode.o
+(libbb/lib.a)perror_nomsg_and_die.o
+(libbb/lib.a)pidfile.o
+(libbb/lib.a)print_flags.o
+(libbb/lib.a)print_numbered_lines.o
+(libbb/lib.a)printable.o
+(libbb/lib.a)printable_string.o
+(libbb/lib.a)process_escape_sequence.o
+(libbb/lib.a)procps.o
+(libbb/lib.a)progress.o
+(libbb/lib.a)ptr_to_globals.o
+(libbb/lib.a)pw_encrypt.o
+(libbb/lib.a)read_key.o
+(libbb/lib.a)read_printf.o
+(libbb/lib.a)recursive_action.o
+(libbb/lib.a)remove_file.o
+(libbb/lib.a)replace.o
+(libbb/lib.a)run_shell.o
+(libbb/lib.a)safe_gethostname.o
+(libbb/lib.a)safe_poll.o
+(libbb/lib.a)safe_strncpy.o
+(libbb/lib.a)simplify_path.o
+(libbb/lib.a)single_argv.o
+(libbb/lib.a)speed_table.o
+(libbb/lib.a)str_tolower.o
+(libbb/lib.a)sysconf.o
+(libbb/lib.a)trim.o
+(libbb/lib.a)u_signal_names.o
+(libbb/lib.a)udp_io.o
+(libbb/lib.a)unicode.o
+(libbb/lib.a)utmp.o
+(libbb/lib.a)uuencode.o
+(libbb/lib.a)vfork_daemon_rexec.o
+(libbb/lib.a)wfopen_input.o
+(libbb/lib.a)xatonum.o
+(libbb/lib.a)xconnect.o
+(libbb/lib.a)xgetcwd.o
+(libbb/lib.a)xgethostbyname.o
+(libbb/lib.a)xrealloc_vector.o
+(libbb/lib.a)xregcomp.o
+(libbb/lib.a)bb_askpass.o
+libpwdgrp/lib.a
+loginutils/lib.a
+mailutils/lib.a
+miscutils/lib.a
+modutils/lib.a
+networking/lib.a
+networking/libiproute/lib.a
+networking/udhcp/lib.a
+printutils/lib.a
+procps/lib.a
+runit/lib.a
+selinux/lib.a
+shell/lib.a
+sysklogd/lib.a
+util-linux/lib.a
+util-linux/volume_id/lib.a
+archival/built-in.o
+archival/libarchive/built-in.o
+console-tools/built-in.o
+coreutils/built-in.o
+coreutils/libcoreutils/built-in.o
+debianutils/built-in.o
+klibc-utils/built-in.o
+e2fsprogs/built-in.o
+editors/built-in.o
+findutils/built-in.o
+init/built-in.o
+libbb/built-in.o
+libpwdgrp/built-in.o
+loginutils/built-in.o
+mailutils/built-in.o
+miscutils/built-in.o
+modutils/built-in.o
+networking/built-in.o
+networking/libiproute/built-in.o
+networking/udhcp/built-in.o
+printutils/built-in.o
+procps/built-in.o
+runit/built-in.o
+selinux/built-in.o
+shell/built-in.o
+sysklogd/built-in.o
+util-linux/built-in.o
+util-linux/volume_id/built-in.o
+archival/lib.a
+archival/libarchive/lib.a
+console-tools/lib.a
+coreutils/lib.a
+coreutils/libcoreutils/lib.a
+debianutils/lib.a
+klibc-utils/lib.a
+e2fsprogs/lib.a
+editors/lib.a
+findutils/lib.a
+init/lib.a
+libbb/lib.a
+libpwdgrp/lib.a
+loginutils/lib.a
+mailutils/lib.a
+miscutils/lib.a
+modutils/lib.a
+networking/lib.a
+networking/libiproute/lib.a
+networking/udhcp/lib.a
+printutils/lib.a
+procps/lib.a
+runit/lib.a
+selinux/lib.a
+shell/lib.a
+sysklogd/lib.a
+util-linux/lib.a
+util-linux/volume_id/lib.a
+archival/built-in.o
+archival/libarchive/built-in.o
+console-tools/built-in.o
+coreutils/built-in.o
+coreutils/libcoreutils/built-in.o
+debianutils/built-in.o
+klibc-utils/built-in.o
+e2fsprogs/built-in.o
+editors/built-in.o
+findutils/built-in.o
+init/built-in.o
+libbb/built-in.o
+libpwdgrp/built-in.o
+loginutils/built-in.o
+mailutils/built-in.o
+miscutils/built-in.o
+modutils/built-in.o
+networking/built-in.o
+networking/libiproute/built-in.o
+networking/udhcp/built-in.o
+printutils/built-in.o
+procps/built-in.o
+runit/built-in.o
+selinux/built-in.o
+shell/built-in.o
+sysklogd/built-in.o
+util-linux/built-in.o
+util-linux/volume_id/built-in.o
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_lshrdi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_ashldi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_ashrdi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_fixdfdi.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_fixunsdfdi.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_floatdidf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_floatundidf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_divdi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_moddi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_udivdi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_umoddi3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_clz.o
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc_eh.a succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc_eh.a
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libc.a failed
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/libc.a failed
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sysconf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_sha256.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_sha512.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)closedir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)opendir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)readdir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__environ.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__libc_start_main.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)clearenv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getenv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)putenv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setenv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)unsetenv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__errno_location.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strerror.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)exit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)creat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fcntl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)open.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)libc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)syscall_ret.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)daemon.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpagesize.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lutimes.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)utmpx.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)adjtimex.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)chroot.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)prctl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sendfile.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setgroups.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sethostname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)settimeofday.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)syncfs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sysinfo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)utimes.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__lctrans.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lite_malloc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)malloc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)atan2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)cos.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)exp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)log.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pow.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fabs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sqrt.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)scalbn.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sin.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dirname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getopt.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getopt_long.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpriority.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getrlimit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)initgroups.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ioctl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mntent.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pty.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)realpath.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setpriority.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setrlimit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)syscall.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)syslog.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)uname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)madvise.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mmap.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mremap.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)munmap.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mblen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mbtowc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)accept.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)bind.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)connect.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ether.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)freeaddrinfo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getaddrinfo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gethostbyaddr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gethostbyaddr_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gethostbyname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gethostbyname2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gethostbyname2_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getnameinfo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpeername.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getservbyname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getservbyname_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getservbyport.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getservbyport_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getsockname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getsockopt.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)h_errno.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)hstrerror.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)htonl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)htons.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)if_indextoname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)if_nametoindex.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)inet_addr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)inet_aton.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)inet_ntoa.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)inet_ntop.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)inet_pton.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)listen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lookup_ipliteral.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lookup_name.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lookup_serv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ns_parse.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ntohl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ntohs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)recv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)recvfrom.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)recvmsg.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)res_mkquery.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)res_msend.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)res_send.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)resolvconf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)send.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sendmsg.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sendto.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setsockopt.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)shutdown.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)socket.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)socketpair.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgrent.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgrent_a.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgrouplist.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpwent.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpwent_a.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)nscd_query.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)rand.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execle.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execlp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execv.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execve.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)execvp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fork.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)system.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vfork.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)wait.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)waitpid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fnmatch.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)glob.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)regcomp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)regerror.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)regexec.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tre-mem.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)affinity.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sched_yield.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)poll.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)select.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)longjmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setjmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)block.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)kill.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)killpg.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)raise.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigsetjmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setitimer.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigaction.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigaddset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigdelset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigemptyset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigfillset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigisemptyset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigismember.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)siglongjmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)signal.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigprocmask.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigrtmax.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigrtmin.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigsetjmp_tail.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sigsuspend.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)chmod.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fchmod.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fstat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)futimesat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lstat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mkdir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mkfifo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mknod.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)statvfs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)umask.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)utimensat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__fclose_ca.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__fdopen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__fopen_rb_ca.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__lockfile.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdio_close.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdio_read.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdio_seek.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdio_write.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)clearerr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fclose.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)feof.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ferror.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fflush.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fgets.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fileno.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fopen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fputs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fread.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)freopen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fscanf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fseek.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fwrite.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getc_unlocked.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getchar_unlocked.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getline.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ofl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ofl_add.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pclose.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)popen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)printf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)putc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)putc_unlocked.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)putchar_unlocked.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)puts.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)rename.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setbuf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setvbuf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)snprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sscanf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stderr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stdin.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stdout.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ungetc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vasprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vdprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vfprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vfscanf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vsnprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vsprintf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)vsscanf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)atof.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)atoi.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)bsearch.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)div.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)qsort.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strtod.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strtol.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memchr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memcmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memcpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memmove.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mempcpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memrchr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)memset.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stpcpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcasecmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcasestr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcat.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strchr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strchrnul.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strcspn.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strdup.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strlen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strncasecmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strncmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strncpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strnlen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strpbrk.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strrchr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strsep.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strsignal.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strspn.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strstr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strtok.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strtok_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strverscmp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mkdtemp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mkstemp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mktemp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)cfgetospeed.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)cfmakeraw.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)cfsetospeed.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tcflush.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tcgetattr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tcsetattr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__lock.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__syscall_cp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__wait.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pthread_cleanup_push.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pthread_setcancelstate.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pthread_sigmask.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pthread_testcancel.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)synccall.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)clock_gettime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ctime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gettimeofday.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)gmtime_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)localtime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)localtime_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mktime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)nanosleep.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strftime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)strptime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)time.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)times.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)_exit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)access.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)alarm.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)chdir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)chown.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)close.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dup.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dup2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dup3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fchdir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fchown.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fdatasync.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fsync.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ftruncate.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getcwd.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getegid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)geteuid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgroups.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getlogin_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpgrp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getppid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getsid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getuid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)isatty.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lchown.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)link.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)lseek.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pause.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pipe.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)pipe2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)read.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)readlink.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)rmdir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setegid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)seteuid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setgid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setpgid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setpgrp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setresgid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setresuid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setsid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setuid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)setxid.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sleep.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)symlink.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sync.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tcgetpgrp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tcsetpgrp.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)ttyname_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)unlink.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)usleep.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)write.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_blowfish.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_des.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)crypt_md5.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)isalnum.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswalnum.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswalpha.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswctype.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswgraph.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswlower.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswprint.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswpunct.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswspace.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswupper.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswxdigit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)tolower.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)towctrans.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)rewinddir.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__init_tls.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)_Exit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)floatscan.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)intscan.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)procfdname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)syscall.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)shgetc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)langinfo.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)expand_heap.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__cos.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__fpclassifyl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__rem_pio2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__rem_pio2_large.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__signbitl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__sin.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)atan.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)copysignl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)floor.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)fmodl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)frexpl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)scalbnl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)internal.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mbrtowc.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mbsinit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mbstowcs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)wctomb.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dn_expand.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dn_skipname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)dns_parse.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getgr_a.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getpw_a.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawn.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawn_file_actions_adddup2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawn_file_actions_destroy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawn_file_actions_init.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawnattr_destroy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawnattr_init.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawnattr_setflags.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawnattr_setsigdefault.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)posix_spawnattr_setsigmask.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)restore.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__fmodeflags.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__overflow.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdout_write.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__string_read.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__toread.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__towrite.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__uflow.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getdelim.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)stpncpy.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)wcschr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)wcslen.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__randname.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mkostemps.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)default_attr.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__set_thread_area.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)clone.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sem_init.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sem_post.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sem_wait.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__secs_to_tm.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__tm_to_secs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__tz.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__year_to_secs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)asctime.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)asctime_r.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)getlogin.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswblank.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)iswcntrl.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)toupper.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)c_locale.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)mbsrtowcs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)wcrtomb.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__stdio_exit.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sem_timedwait.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)sem_trywait.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__map_file.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__month_to_secs.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)isblank.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a)__timedwait.o
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)addtf3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)divtf3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)eqtf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)getf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)letf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)multf3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)subtf3.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)fixtfsi.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)fixunstfsi.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)floatsitf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)floatunsitf.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)extenddftf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)trunctfsf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)trunctfdf2.o
+(/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a)_clzsi2.o
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc_eh.a
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc.a
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/libgcc_eh.a
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/../../../../riscv32-linux-musl/lib/libc.a
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtend.o succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtend.o
+attempt to open /home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtn.o succeeded
+/home/harry/riscv32-linux-musl-cross/bin/../lib/gcc/riscv32-linux-musl/8.3.0/crtn.o
