@@ -1,17 +1,18 @@
-busybox-riscv-prebuilts
+busybox-prebuilts
 ==================================
 
-Prebuilt binaries of busybox for RISC-V.
+Prebuilt binaries of busybox for embedded platforms.
 
 ## How to build
 
-1. Install [riscv-musl-toolchain](jiegec/musl-riscv-toolchain), see its README
-2. Install ncurses
+1. Install [musl toolchain](https://musl.cc) for the corresponding platform, see its README
+2. Install libncurses
 3. Add the toolchain above to PATH
 4. Download and unpack busybox source
-5. Run `ARCH=riscv CROSS_COMPILE=riscv64-linux-musl- make defconfig`
-6. Enter `ARCH=riscv CROSS_COMPILE=riscv64-linux-musl- make menuconfig`, enable static binary
-7. Run `ARCH=riscv CROSS_COMPILE=riscv64-linux-musl- make -j${NCPUS}`
+5. export `ARCH` and `CROSS_COMPILE` to your platorm (for example, `riscv` and `riscv64-linux-musl`)
+6. Run `make defconfig`
+7. Run `make menuconfig`, enable static binary, then choose the applets you need
+8. Run `make -j${NCPUS}`
 
 You will get `busybox` and `busybox_unstripped` binaries. Put them in corresponding directories.
 
